@@ -1,4 +1,8 @@
-{{!-- for all the posts retrieved, each post will be processed by the post-details handlebars --}}
-{{#each posts as |post|}}
+{{#with post}}
 {{> post-details}}
+{{/with}}
+
+{{!-- for all the comments retrieved, each comment will be processed by the comment-details handlebars --}}
+{{#each post.comments as |comment|}}
+{{> comment-details}}
 {{/each}}
