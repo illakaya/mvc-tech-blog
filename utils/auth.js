@@ -1,4 +1,4 @@
-const withAuth = (req, res, next) => {
+const auth = (req, res, next) => {
   // If the user is not logged in, redirect the user to the login page
   // If the user is logged in, allow them to view the posts
   if (!req.session.loggedIn) {
@@ -8,4 +8,4 @@ const withAuth = (req, res, next) => {
   }
 };
 
-module.exports = withAuth;
+module.exports = auth;

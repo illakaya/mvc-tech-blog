@@ -1,18 +1,18 @@
+const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const path = require('path');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
-const helpers = require('./utils/helpers'); 
-// retrieve if withAuth helpers added
+const auth = require('./utils/auth'); 
+// retrieve if withAuth utils added
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sess = {
+const sesh = {
   secret: 'Super secret secret',
   cookie: {},
   resave: false,
@@ -22,10 +22,10 @@ const sess = {
   }),
 };
 
-app.use(session(sess));
+app.use(session(sesh));
 
-const hbs = exphbs.create({ helpers }); 
-// call create as helpers withAuth is used
+const hbs = exphbs.create({ auth }); 
+// call create a withAuth util
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');

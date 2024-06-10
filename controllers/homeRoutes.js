@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 // TODO: Import the custom middleware
-const { withAuth } = require('../utils/auth');
+const { auth } = require('../utils/auth');
 
-// GET all galleries for homepage
+// GET all posts for homepage
 router.get('/', async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
+      // we want to include the users name, so we retrieve that as well
       include: [
         {
           model: User,
@@ -14,10 +15,10 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-
+    // convert the objct into a plainer object where it is much easier to read the attributes
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', {
+    res.render('post', {
       posts,
       // create variable for handlebars to display login/logout
       loggedIn: req.session.loggedIn,
@@ -28,11 +29,11 @@ router.get('/', async (req, res) => {
   }
 });
 
+/*
 // GET one post
-// TODO: Replace the logic below with the custom middleware
-router.get('/post/:id', withAuth, async (req, res) => {
+// add custom middleware to redirect
+router.get('/post/:id', auth, async (req, res) => {
   // If the user is not logged in, redirect the user to the login page
-
   // If the user is logged in, allow them to view the post
   try {
     const dbPostData = await Post.findByPk(req.params.id, {
@@ -54,29 +55,15 @@ router.get('/post/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+*/
 
-// GET one post
-// Added custom middleware
-router.get('/post/:id', withAuth, async (req, res) => {
-  // If the user is not logged in, redirect the user to the login page
-  try {
-    const dbPostData = await Post.findByPk(req.params.id);
-
-    const post = dbPostData.get({ plain: true });
-
-    res.render('post', { post, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
+// for the login endpoint, show the login page
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-
+  // render the login page
   res.render('login');
 });
 

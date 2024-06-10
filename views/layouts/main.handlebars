@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tech Blog</title>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    {{!-- if the user is logged in, show the dashboard and logout button --}}
+    {{#if loggedIn}} 
+    <a href="/dashboard">Dashboard</a>
+    <button>Logout</button>
+    {{!-- if the user is not logged in, then only show the login button --}}
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
+  </nav>
+  <header>
+    <h1>The Tech Blog</h1>
+  </header>
+  <main>
+    <div>
+      {{!-- this is where the partial handlebars will display --}}
+      {{{body}}}
+    </div>
+  </main>
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+</body>
+</html>
