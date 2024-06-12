@@ -1,4 +1,8 @@
-<section class="card">
-    {{!-- comment text, with the identified user who wrote the comment --}}
-    <p>{{text}} - <strong>{{user.username}}</strong></p>
+<section class="card mb-3">
+    <div class="card-header p-4"></div>
+    <div class="card-body">
+        {{!-- comment text, with the identified user who wrote the comment --}}
+        <p>{{text}}</p>
+         <p class="mb-0">—{{user.username}}, date</p>
+    </div>
 </section>

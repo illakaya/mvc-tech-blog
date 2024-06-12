@@ -1,7 +1,7 @@
 {{!-- for all the posts retrieved, each post will be processed by the post-details handlebars --}}
 {{#each posts as |post|}}
 {{!-- to retrieve post link later --}}
-<a href="/post/{{id}}">
+<a href="/post/{{id}}" class="card mb-3">
 {{> post-details}}
 </a>
 {{/each}}
