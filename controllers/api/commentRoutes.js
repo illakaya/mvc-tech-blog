@@ -1,31 +1,29 @@
 // initialise express
 const router = require('express').Router();
 // retrieve Post model
-const { Post, User, Comment } = require('../../models');
+const { User, Comment } = require('../../models');
 
-// create a new post
+// create a new comment
 router.post('/', async (req, res) => {
   try {
-    const dbPostData = await Post.create({
-      title: req.body.title,
+    const dbCommentData = await Comment.create({
       text: req.body.text,
       user_id: req.session.userId,
+      post_id: req.body.postId,
     });
-    res.status(200).json(dbPostData);
+    res.status(200).json(dbCommentData);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
 
-// update a post
+// update a comment
 router.put('/:id', async (req, res) => {
   try {
-    const dbPostData = await Post.update(
+    const dbCommentData = await Comment.update(
       {
-        title: req.body.title,
         text: req.body.text,
-        user_id: req.session.userId,
       },
       {
         where: {
@@ -33,31 +31,31 @@ router.put('/:id', async (req, res) => {
         },
       }
     );
-    res.status(200).json(dbPostData);
+    res.status(200).json(dbCommentData);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
 
-// delete a post
+// delete a comment
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedPost = await Post.destroy({
+    const deletedComment = await Comment.destroy({
       where: {
         id: req.params.id,
       },
     });
-    res.status(200).json(deletedPost);
+    res.status(200).json(deletedComment);
   } catch (error) {
     res.status(404).json(error);
   }
 });
 
-// retrieve posts to test
+// retrieve comments to test
 router.get('/', async (req, res) => {
   try {
-    const dbPostData = await Post.findAll({
+    const dbCommentData = await Comment.findAll({
       // we want to include the users name, so we retrieve that as well
       include: [
         {
@@ -67,39 +65,27 @@ router.get('/', async (req, res) => {
       ],
     });
     // return as a json object
-    res.status(200).json(dbPostData);
+    res.status(200).json(dbCommentData);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
 
-// retrieve a single post with the user and associated comments
+// retrieve a single comment with the user and associated comments
 router.get('/:id', async (req, res) => {
   try {
-    // retrieve the post info
-    const dbPostData = await Post.findByPk(req.params.id, {
+    // retrieve the comment info
+    const dbCommentData = await Comment.findByPk(req.params.id, {
       include: [
         {
-          // retrieve the user that wrote the post
+          // retrieve the user that wrote the comment
           model: User,
-          attributes: ['username'],
-        },
-        {
-          // retrieve the comments of the post
-          model: Comment,
-          attributes: ['text', 'date', 'user_id'],
-          include: [
-            {
-              // retrieve the user that wrote the comment
-              model: User,
-              attributes: ['username'],
-            },
-          ],
+          attributes: ['id', 'username'],
         },
       ],
     });
-    res.status(200).json(dbPostData);
+    res.status(200).json(dbCommentData);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
