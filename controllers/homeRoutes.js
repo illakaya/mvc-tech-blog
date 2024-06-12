@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-    // convert the objct into a plainer object where it is much easier to read the attributes
+    // convert the object into a plainer object where it is much easier to read the attributes
     const posts = dbPostData.map((post) => post.get({ plain: true }));
     // render the homepage with the info retrieved
     res.render('homepage', {

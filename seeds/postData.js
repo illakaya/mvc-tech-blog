@@ -13,7 +13,7 @@ const postData = [
   },
   {
     title: 'Object-Relational Mapping',
-    text: 'I have really loved learning about ORMs. It\'s really simplified the way I create queries!',
+    text: "I have really loved learning about ORMs. It's really simplified the way I create queries!",
     user_id: 2,
   }
 ];
