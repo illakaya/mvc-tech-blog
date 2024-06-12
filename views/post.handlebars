@@ -1,14 +1,23 @@
-{{#with post}}
-{{> post-details}}
-{{/with}}
+<div class="card mb-3">
+  {{#with post}}
+  {{> post-details}}
+  {{/with}}
+</div>
 
 {{!-- for all the comments retrieved, each comment will be processed by the comment-details handlebars --}}
 {{#each post.comments as |comment|}}
 {{> comment-details}}
 {{/each}}
 
-<form class="card">
-  <label for="comment">Comment</label>
-  <input type="text" id="comment">
-  <input type="submit" value="Submit">
-</form>
+<div class="card">
+  <div class="card-header p-4"></div>
+  <div class="card-body">
+    <form>
+      <label for="comment" class="form-label">Comment</label>
+      <textarea class="form-control" rows="3" id=""></textarea>
+      <div class="d-grid mt-3">
+        <input type="submit" value="Submit" class="btn btn-secondary">
+      </div>
+    </form>
+  </div>
+</div>
