@@ -6,3 +6,9 @@
 {{#each post.comments as |comment|}}
 {{> comment-details}}
 {{/each}}
+
+<form class="card">
+  <label for="comment">Comment</label>
+  <input type="text" id="comment">
+  <input type="submit" value="Submit">
+</form>
