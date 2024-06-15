@@ -53,3 +53,25 @@ const signupFormHandler = async (event) => {
 // add event listeners to both forms
 document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
 document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
+
+// switching between login and register
+const logInForm = document.querySelector('.login-card');
+const regForm = document.querySelector('.signup-card');
+const switchToRegBtn = document.getElementById('switch-to-reg');
+const switchToLogBtn = document.getElementById('switch-to-log');
+
+function switchLogReg(event) {
+  event.preventDefault();
+  if (logInForm.classList.contains('is-hidden')) {
+    console.log('switched to signup');
+    logInForm.classList.remove('is-hidden');
+    regForm.classList.add('is-hidden');
+  } else {
+    console.log('switched to login');
+    logInForm.classList.add('is-hidden');
+    regForm.classList.remove('is-hidden');
+  }
+}
+
+switchToLogBtn.addEventListener('click', switchLogReg);
+switchToRegBtn.addEventListener('click', switchLogReg);

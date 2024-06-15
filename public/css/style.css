@@ -1,3 +1,15 @@
 a {
   text-decoration: none;
 }
+
+.form {
+  max-width: 600px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.centre {
+  text-align: center;
+}

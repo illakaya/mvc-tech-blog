@@ -22,6 +22,7 @@ router.get('/', async (req, res) => {
       posts,
       // create variable for handlebars to display login/logout
       loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
     });
   } catch (error) {
     console.log(error);
@@ -59,7 +60,7 @@ router.get('/post/:id', auth, async (req, res) => {
     });
     // render the post page with the info retrieved
     const post = dbPostData.get({ plain: true });
-    res.render('post', { post, loggedIn: req.session.loggedIn });
+    res.render('post', { post, loggedIn: req.session.loggedIn, userId: req.session.userId, });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -95,7 +96,8 @@ router.get('/dashboard', async (req, res) => {
     // render the homepage with the info retrieved
     res.render('dashboard', {
       posts,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
     });
   } catch (error) {
     console.log(error);
