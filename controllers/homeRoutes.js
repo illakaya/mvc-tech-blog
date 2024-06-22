@@ -60,7 +60,10 @@ router.get('/post/:id', auth, async (req, res) => {
     });
     // render the post page with the info retrieved
     const post = dbPostData.get({ plain: true });
-    res.render('post', { post, loggedIn: req.session.loggedIn, userId: req.session.userId, });
+    res.render('post', { 
+      post, 
+      loggedIn: req.session.loggedIn, 
+      userId: req.session.userId });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -103,6 +106,20 @@ router.get('/dashboard', async (req, res) => {
     console.log(error);
     res.status(500).json(error);
   }
+});
+
+// for the create endpoint, show the create new post page
+router.get('/create', auth, (req, res) => {
+  try {
+    // render the create new post page
+    res.render('create', {
+      loggedIn: req.session.loggedIn,
+      userId: req.session.userId,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }  
 });
 
 module.exports = router;

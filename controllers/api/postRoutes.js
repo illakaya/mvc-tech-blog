@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
     const dbPostData = await Post.create({
       title: req.body.title,
       text: req.body.text,
-      user_id: req.session.userId,
+      user_id: req.body.userId,
     });
     res.status(200).json(dbPostData);
   } catch (error) {
@@ -25,7 +25,7 @@ router.put('/:id', async (req, res) => {
       {
         title: req.body.title,
         text: req.body.text,
-        user_id: req.session.userId,
+        user_id: req.body.userId,
       },
       {
         where: {
