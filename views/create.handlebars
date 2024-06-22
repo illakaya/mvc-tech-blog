@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header p-3">Create New Post</div>
+  <div class="card-body">
+    <form class="post-form" data-userId="{{userId}}">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" rows="3" id="post-title">
+      <label for="content" class="form-label">Content</label>
+      <textarea class="form-control" rows="3" id="post-text"></textarea>
+      <div class="d-grid mt-3">
+        <input type="submit" value="Submit" class="btn btn-secondary">
+      </div>
+    </form>
+  </div>
+</div>
+<script src="/js/post.js"></script>
