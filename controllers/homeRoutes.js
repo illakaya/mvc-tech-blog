@@ -32,9 +32,8 @@ router.get('/', async (req, res) => {
 
 // GET one post
 // add custom middleware to redirect
-router.get('/post/:id', auth, async (req, res) => {
-  // If the user is not logged in, redirect the user to the login page
-  // If the user is logged in, allow them to view the post
+router.get('/post/:id', async (req, res) => {
+  // View the post
   try {
     // retrieve the post info
     const dbPostData = await Post.findByPk(req.params.id, {
