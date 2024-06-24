@@ -21,7 +21,7 @@ User.init(
     username: {
       type: DataTypes.STRING,
       unique: true, // usernames must be unique
-      allowNull: false,
+      allowNull: false, 
     },
     password: {
       type: DataTypes.STRING,

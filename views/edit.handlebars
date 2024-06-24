@@ -1,0 +1,20 @@
+<div class="card mb-3" id="post-edit" data-postId="{{post.id}}">
+  {{#with post}}
+    {{! post title }}
+    <div class="card-header p-3">Edit Post</div>
+    <div class="card-body">
+      {{! post text, with the identified user who wrote the post }}
+      <form class="edit-form" data-userId="{{userId}}">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" rows="3" id="edit-title" value="{{title}}"/>
+        <label for="content" class="form-label">Content</label>
+        <textarea class="form-control" rows="3" id="edit-text">{{text}}</textarea>
+        <div class="d-grid mt-3">
+          <input type="submit" value="Update Post" class="btn btn-secondary mb-3" />
+          <button class="btn btn-secondary" id="delete">Delete</button>
+        </div>
+      </form>
+    </div>
+  {{/with}}
+</div>
+<script src="/js/edit.js"></script>
