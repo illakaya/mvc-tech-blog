@@ -122,4 +122,41 @@ router.get('/create', auth, (req, res) => {
   }  
 });
 
+// for the edit endpoint, show the post that was clicked on
+router.get('/dashboard/post/:id', async (req, res) => {
+  try {
+    // retrieve the post info
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          // retrieve the user that wrote the post
+          model: User,
+          attributes: ['id', 'username'],
+        },
+        {
+          // retrieve the comments of the post
+          model: Comment,
+          attributes: ['id', 'text', 'date', 'user_id'],
+          include: [
+            {
+              // retrieve the user that wrote the comment
+              model: User,
+              attributes: ['id', 'username'],
+            },
+          ],
+        },
+      ],
+    });
+    // render the post page with the info retrieved
+    const post = dbPostData.get({ plain: true });
+    res.render('edit', { 
+      post, 
+      loggedIn: req.session.loggedIn, 
+      userId: req.session.userId });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

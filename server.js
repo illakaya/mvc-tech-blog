@@ -7,7 +7,8 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const auth = require('./utils/auth'); 
-// retrieve if withAuth utils added
+const helpers = require('./utils/helpers');
+// retrieve withAuth and date helpers utils added
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,7 +25,7 @@ const sesh = {
 
 app.use(session(sesh));
 
-const hbs = exphbs.create({ auth }); 
+const hbs = exphbs.create({ auth, helpers }); 
 // call create a withAuth util
 
 app.engine('handlebars', hbs.engine);

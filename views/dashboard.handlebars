@@ -4,10 +4,10 @@
 {{!-- for all the posts retrieved, each post will be processed by the post-details handlebars --}}
 {{#each posts as |post|}}
 {{!-- to retrieve post link later --}}
-<div class="card">
+<a href="/dashboard/post/{{id}}" class="card mb-3">
   <div class="card-header d-flex justify-content-between align-items-center flex-container">
     <h3 class="flex-item">{{title}}</h3>
-    <p class="flex-item my-0">Posted by {{user.username}} on date</p>
+    <p class="flex-item my-0">Posted by {{user.username}} on {{format_date date}}</p>
   </div>
-</div>
+</a>
 {{/each}}
