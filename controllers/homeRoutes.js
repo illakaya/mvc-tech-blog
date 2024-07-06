@@ -80,7 +80,7 @@ router.get('/login', (req, res) => {
 });
 
 // GET all user posts for dashboard
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', auth, async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
       include: [
